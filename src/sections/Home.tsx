@@ -16,7 +16,8 @@ import {
   Person
 } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles'; // ✅ Import Theme type
 
 const slides = [
   {
@@ -45,7 +46,8 @@ const slides = [
   }
 ];
 
-const HeroButton = styled(Button)(({ theme }) => ({
+// ✅ Add proper Theme type to fix 'theme.shadows' error
+const HeroButton = styled(Button)(({ theme }: { theme: Theme }) => ({
   padding: theme.spacing(1.5, 3),
   fontSize: '1.1rem',
   fontWeight: 600,
@@ -184,16 +186,15 @@ const Home = () => {
             flexDirection: isMobile ? 'column' : 'row'
           }}>
             <HeroButton 
-              variant="contained" 
-              color="secondary" 
+              variant="contained"
+              color="secondary"
               size="large"
-              startIcon={<Person />}
-            >
+              startIcon={<Person />} theme={undefined}            >
               Admissions
             </HeroButton>
             <HeroButton 
-              variant="outlined" 
-              color="inherit" 
+              variant="outlined"
+              color="inherit"
               size="large"
               startIcon={<Star />}
               sx={{
@@ -201,13 +202,12 @@ const Home = () => {
                 '&:hover': {
                   borderWidth: '2px'
                 }
-              }}
-            >
+              }} theme={undefined}            >
               Learn More
             </HeroButton>
             <HeroButton 
-              variant="outlined" 
-              color="inherit" 
+              variant="outlined"
+              color="inherit"
               size="large"
               startIcon={<Event />}
               sx={{
@@ -215,8 +215,7 @@ const Home = () => {
                 '&:hover': {
                   borderWidth: '2px'
                 }
-              }}
-            >
+              }} theme={undefined}            >
               Events
             </HeroButton>
           </Box>

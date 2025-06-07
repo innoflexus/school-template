@@ -8,7 +8,7 @@ import {
   Grid,
   Avatar,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import {
   ExpandMore,
@@ -19,23 +19,23 @@ import {
   People,
   LibraryBooks,
   Computer,
-  Sports
+  Sports,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import { styled } from '@mui/system';
+import { styled, Theme } from '@mui/material/styles';
 
-const StyledAccordion = styled(Accordion)(({ theme }) => ({
+const StyledAccordion = styled(Accordion)(({ theme }: { theme: Theme }) => ({
   marginBottom: theme.spacing(2),
   borderRadius: '12px',
   boxShadow: theme.shadows[4],
   transition: 'all 0.3s ease',
   '&:hover': {
     transform: 'translateY(-5px)',
-    boxShadow: theme.shadows[8]
+    boxShadow: theme.shadows[8],
   },
   '&:before': {
-    display: 'none'
-  }
+    display: 'none',
+  },
 }));
 
 const AnimatedBox = motion(Box);

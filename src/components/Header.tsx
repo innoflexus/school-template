@@ -1,3 +1,4 @@
+// Header.tsx
 import React, { useState, useEffect } from 'react';
 import {
   AppBar,
@@ -16,19 +17,24 @@ import {
 } from '@mui/material';
 import {
   School,
-  Info,
-  Book,
-  Photo,
-  Mail,
   Menu,
-  Home,
   Notifications,
   Event,
   Login
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
-import MobileMenu from './MobileMenu'; // Ensure this file exists with correct props
+import MobileMenu from './MobileMenu';
+
+export interface NavItem {
+  id: string;
+  text: string;
+  icon: React.ReactNode;
+}
+
+interface HeaderProps {
+  navItems: NavItem[];
+}
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: 'linear-gradient(135deg, rgba(26,35,126,0.95) 0%, rgba(42,53,162,0.95) 100%)',
@@ -57,7 +63,7 @@ const NavButton = styled(Button)(({ theme }) => ({
   }
 }));
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ navItems }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -80,14 +86,6 @@ const Header = () => {
     setMobileOpen(false);
   };
 
-  const navItems = [
-    { id: 'home', label: 'Home', icon: <Home /> },
-    { id: 'about', label: 'About', icon: <Info /> },
-    { id: 'academics', label: 'Academics', icon: <Book /> },
-    { id: 'gallery', label: 'Gallery', icon: <Photo /> },
-    { id: 'contact', label: 'Contact', icon: <Mail /> }
-  ];
-
   return (
     <Slide appear={false} direction="down" in={!scrolled}>
       <StyledAppBar position="fixed" elevation={scrolled ? 4 : 0}>
@@ -106,8 +104,6 @@ const Header = () => {
               onClick={() => scrollTo('home')}
             >
               <Avatar
-                src="/logo.png"
-                alt="School Logo"
                 sx={{
                   width: 48,
                   height: 48,
@@ -162,7 +158,7 @@ const Header = () => {
                   {navItems.map((item) => (
                     <motion.div key={item.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                       <NavButton startIcon={item.icon} onClick={() => scrollTo(item.id)}>
-                        {item.label}
+                        {item.text}
                       </NavButton>
                     </motion.div>
                   ))}

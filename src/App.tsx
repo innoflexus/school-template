@@ -1,5 +1,6 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { Home as HomeIcon, Info, Book, Photo, Mail } from '@mui/icons-material';
 
 import Header from './components/Header';
 import ScrollToTop from './components/ScrollToTop';
@@ -8,6 +9,13 @@ import About from './sections/About';
 import Academics from './sections/Academics';
 import Gallery from './sections/Gallery';
 import Contact from './sections/Contact';
+
+// Define the NavItem type to keep consistency
+interface NavItem {
+  id: string;
+  text: string;
+  icon: React.ReactNode;
+}
 
 const theme = createTheme({
   palette: {
@@ -20,11 +28,19 @@ const theme = createTheme({
   },
 });
 
-function App() {
+const navItems: NavItem[] = [
+  { id: 'home', text: 'Home', icon: <HomeIcon /> },
+  { id: 'about', text: 'About', icon: <Info /> },
+  { id: 'courses', text: 'Courses', icon: <Book /> },
+  { id: 'gallery', text: 'Gallery', icon: <Photo /> },
+  { id: 'contact', text: 'Contact', icon: <Mail /> },
+];
+
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
+      <Header navItems={navItems} /> {/* Pass navItems as props */}
       <Home />
       <About />
       <Academics />
@@ -33,6 +49,6 @@ function App() {
       <ScrollToTop />
     </ThemeProvider>
   );
-}
+};
 
 export default App;
