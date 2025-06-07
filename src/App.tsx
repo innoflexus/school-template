@@ -1,25 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+
+import Header from './components/Header';
+import ScrollToTop from './components/ScrollToTop';
+import Home from './sections/Home';
+import About from './sections/About';
+import Academics from './sections/Academics';
+import Gallery from './sections/Gallery';
+import Contact from './sections/Contact';
+
+const theme = createTheme({
+  palette: {
+    primary: { main: '#1a237e' },
+    secondary: { main: '#ff6f00' },
+    background: { default: '#f5f5f5' },
+  },
+  typography: {
+    fontFamily: '"Poppins", "Roboto", sans-serif',
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header />
+      <Home />
+      <About />
+      <Academics />
+      <Gallery />
+      <Contact />
+      <ScrollToTop />
+    </ThemeProvider>
   );
 }
 
